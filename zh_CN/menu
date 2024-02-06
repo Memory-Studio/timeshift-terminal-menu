@@ -1,0 +1,54 @@
+unsetopt INTERACTIVE_COMMENTS
+unsetopt BAD_PATTERN
+
+clear
+echo "Timeshift BTRFS 终端备份脚本 V1"
+echo "--------------------------"
+echo "1.清空快照"
+echo "2.删除快照"
+echo "3.备份"
+echo "4.清空并备份"
+echo "5.快照列表"
+echo "6.还原"
+echo "--------------------------"
+echo "请输入一个选项以执行[1/2/3/4/5/6]"
+read num
+
+a=1
+b=2
+c=3
+d=4
+e=5
+f=6
+
+if [ "$num" -eq "$a" ]
+then
+    echo "开始执行清空快照"
+    sudo timeshift --delete-all && sudo update-grub
+    echo "执行成功"
+elif [ "$num" -eq "$b" ]
+then
+    echo "开始执行删除快照"
+    sudo timeshift --delete && sudo update-grub
+    echo "执行成功"
+elif [ "$num" -eq "$c" ]
+then
+    echo "开始执行备份"
+    sudo timeshift --btrfs --create && sudo update-grub
+    echo "执行成功"
+elif [ "$num" -eq "$d" ]
+then
+    echo "开始执行清空并备份"
+    sudo timeshift --delete-all && sudo timeshift --btrfs --create && sudo update-grub
+    echo "执行成功"
+elif [ "$num" -eq "$e" ]
+then
+    echo "开始执行显示列表"
+    sudo timeshift --list
+    echo "执行成功"
+elif [ "$num" -eq "$f" ]
+then
+    echo "开始执行还原"
+    sudo timeshift --restore
+    echo "执行成功" 
+fi

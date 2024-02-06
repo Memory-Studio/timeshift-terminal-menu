@@ -1,0 +1,48 @@
+unsetopt INTERACTIVE_COMMENTS
+unsetopt BAD_PATTERN
+
+clear
+echo "Timeshift BTRFS Backup Script V1"
+echo "--------------------------"
+echo "1.Clear all snapshots"
+echo "2.Delete snapshot"
+echo "3.Backup"
+echo "4.Clear all snapshots & Backup"
+echo "5.Snapshots list"
+echo "6.Restore"
+echo "--------------------------"
+echo "Please choose one:[1/2/3/4/5/6]"
+read num
+
+a=1
+b=2
+c=3
+d=4
+e=5
+f=6
+
+if [ "$num" -eq "$a" ]
+then
+    sudo timeshift --delete-all && sudo update-grub
+    echo "Success"
+elif [ "$num" -eq "$b" ]
+then
+    sudo timeshift --delete && sudo update-grub
+    echo "Success"
+elif [ "$num" -eq "$c" ]
+then
+    sudo timeshift --btrfs --create && sudo update-grub
+    echo "Success"
+elif [ "$num" -eq "$d" ]
+then
+    sudo timeshift --delete-all && sudo timeshift --btrfs --create && sudo update-grub
+    echo "Success"
+elif [ "$num" -eq "$e" ]
+then
+    sudo timeshift --list
+    echo "Success"
+elif [ "$num" -eq "$f" ]
+then
+    sudo timeshift --restore
+    echo "Success"
+fi
